@@ -1,34 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void swap(int *p,int *q) {
-   int t;
-   
-   t=*p; 
-   *p=*q; 
-   *q=t;
+#define ELEMENTS 6
+
+int values[] = { 40, 10, 100, 90, 20, 25 };
+
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
 }
 
-void sort(int a[],int n) { 
-   int i,j,temp;
-
-   for(i=0;i<n-1;i++) {
-      for(j=0;j<n-i-1;j++) {
-         if(a[j]>a[j+1])
-            swap(&a[j],&a[j+1]);
-      }
-   }
-}
-
-int main() {
-   int a[] = {6,3,8,5,1};
-   int n = 5;
-   int sum,i;
-
-   sort(a,n);
-   
-   n = (n+1) / 2 - 1;  // -1 as array indexing in C starts from 0
-
-   printf("Median = %d ", a[n]);
-
-   return 0;
+int main ()
+{
+  int n;
+  qsort (values, ELEMENTS, sizeof(int), compare);
+  for (n=0; n<ELEMENTS; n++)
+  {   printf ("%d ",values[n]); }
+  printf ("median=%d ",values[ELEMENTS/2]);
+  return 0;
 }
